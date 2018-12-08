@@ -1,7 +1,10 @@
 from redis import StrictRedis
+
+
 class Config(object):
     '''项目的配置'''
     DEBUG = True
+
     #设置启动模式秘钥
     SECRET_KEY = 'adO9TUW0KoxTuG+wstHqD59hvJAOexP6bIUROcrityGAdaSxkOvbKRIVdpcyttk1'
 
