@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy         #建立数据库映射关系
 from redis import StrictRedis                       #从redis包中导入创建StrictRedis对象
-from config import Config                            #自定义session的库
+from config import config, Config                   #自定义session的库
 from flask.ext.wtf import CSRFProtect               #导入跨站伪造保护的库
 from flask_session import Session                   #导入自定义session的库
 
@@ -10,7 +10,7 @@ from flask_session import Session                   #导入自定义session的�
 app = Flask(__name__)
 
 #加载app配置信息
-app.config.from_object(Config)
+app.config.from_object(config["development"])
 db = SQLAlchemy(app)
 
 #初始化redis连接
