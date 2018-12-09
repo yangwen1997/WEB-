@@ -1,7 +1,9 @@
 from flask import session
 from flask_script import Manager                #从flask脚本中导入 管理包
 from flask_migrate import Migrate, MigrateCommand  #导入数据库迁移提交库和迁移库
-from App_WEB import app, db
+from App_WEB import create_app, db
+
+app = create_app('developent')
 
 #管理app
 manger = Manager(app)
