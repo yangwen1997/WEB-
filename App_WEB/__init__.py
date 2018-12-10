@@ -1,3 +1,5 @@
+import logging
+from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy         #建立数据库映射关系
 from redis import StrictRedis                       #从redis包中导入创建StrictRedis对象
@@ -41,4 +43,25 @@ def  create_app(app_name):
 
     #指定Session，会先加载在config中配置的session信息
     Session(app)
+
+    #传递日志级别
+    log_file(app_name.LEVEL)
+
     return app
+
+
+def log_file(levels):
+    """记录日志的方法 设置日志的等级"""
+    logging.basicConfig(level = levels)
+
+    #创建日志记录器、指定日志的保存位置，文件大小及个数
+    file_log_handler = RotatingFileHandler("logs/log", maxBytes = 1024 * 1024 * 50, backupCount = 10)
+
+    #创建日志记录格式 日志等级 输入日志信息的文件名 行数 日志信息
+    formatter = logging.Formatter('%(levelname)s %(filename)s : %(lineno)s %(message)s')
+
+    #为刚创建的日志记录器设置记录格式
+    file_log_handler.setFormatter(formatter)
+
+    #为全局的日志工具添加日志记录器
+    logging.getLogger().addHandler(file_log_handler)
