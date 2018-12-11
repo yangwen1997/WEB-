@@ -13,6 +13,8 @@ app = Flask(__name__)
 #先初始化db对象
 db = SQLAlchemy()
 
+redis_store = None
+
 def  create_app(app_name):
     """创建工厂函数，根据传的参数名进行环境的切换，加载app配置信息"""
 
@@ -36,7 +38,9 @@ def  create_app(app_name):
     db.init_app(app)
 
     #初始化redis连接
+    global redis_store
     redis_store = StrictRedis(host=app_name.REDIS_HOST, port=app_name.REDIS_PORT)
+
 
     #开启跨站伪造保护
     CSRFProtect(app)
