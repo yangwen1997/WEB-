@@ -10,6 +10,7 @@ class Config(object):
 
     #为数据库添加配置
     SQLALCHEMY_DATABASE_URI = "mysql://root:root@127.0.0.1:3306/webtest"
+    #进制追踪修改对象时发送信号
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REDIS_HOST = '127.0.0.1'
     REDIS_PORT = 6379

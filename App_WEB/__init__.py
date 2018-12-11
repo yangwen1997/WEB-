@@ -47,6 +47,10 @@ def  create_app(app_name):
     #传递日志级别
     log_file(app_name.LEVEL)
 
+    # 注册蓝图
+    from App_WEB.models.index import index_blu
+    app.register_blueprint(index_blu)
+
     return app
 
 
