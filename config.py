@@ -9,7 +9,7 @@ class Config(object):
     SECRET_KEY = 'adO9TUW0KoxTuG+wstHqD59hvJAOexP6bIUROcrityGAdaSxkOvbKRIVdpcyttk1'
 
     #为数据库添加配置
-    SQLALCHEMY_DATABASE_URI = "mysql://root:root@127.0.0.1:3306/webtest"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:root@127.0.0.1:3306/webtest"
     #进制追踪修改对象时发送信号
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REDIS_HOST = '127.0.0.1'
@@ -25,12 +25,12 @@ class Config(object):
     SESSION_USE_SIGNER = True
     SESSION_PERMANENT = False
     PERMANENT_SESSION_LIFETIME = 84000 * 2
-
+    LEVEL = logging.DEBUG
 
 class Development(Config):
     """开发环境的配置"""
     DEBUG = True
-    LEVEL = logging.DEBUG
+
 
 class Production(Config):
     """生产环境的配置"""
@@ -41,9 +41,9 @@ class Testing(Config):
     """单元测试环境的配置"""
     DEBUG = True
     TESTING = True
-    LEVEL = logging.DEBUG
 
-config = {
+
+config_dict = {
     'development' : Development,
     'production' : Production,
     'testing' : Testing,
